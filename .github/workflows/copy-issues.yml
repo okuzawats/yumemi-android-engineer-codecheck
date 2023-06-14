@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Getting Labels data
         id: get_label_data
-        uses: octokit/request-action@v2.1.7
+        uses: octokit/request-action@v2.1.9
         with:
           route: GET /repos/yumemi-inc/android-engineer-codecheck/labels
         env:
@@ -31,7 +31,7 @@ jobs:
         label: ${{ fromJson(needs.get-issue-labels.outputs.labels) }}
     steps:
       - name: Create a label
-        uses: octokit/request-action@v2.1.7
+        uses: octokit/request-action@v2.1.9
         with:
           route: POST /repos/${{ github.repository }}/labels
           name: ${{ matrix.label.name }}
@@ -48,7 +48,7 @@ jobs:
     steps:
       - name: Getting Milestones data
         id: get_milestones_data
-        uses: octokit/request-action@v2.1.7
+        uses: octokit/request-action@v2.1.9
         with:
           route: GET /repos/yumemi-inc/android-engineer-codecheck/milestones
         env:
@@ -68,7 +68,7 @@ jobs:
         milestone: ${{ fromJson(needs.get-milestones.outputs.milestones) }}
     steps:
       - name: Create a milestone
-        uses: octokit/request-action@v2.1.7
+        uses: octokit/request-action@v2.1.9
         with:
           route: POST /repos/${{ github.repository }}/milestones
           title: ${{ matrix.milestone.title }}
@@ -86,7 +86,7 @@ jobs:
     steps:
       - name: Getting Milestones data
         id: get_milestones_data
-        uses: octokit/request-action@v2.1.7
+        uses: octokit/request-action@v2.1.9
         with:
           route: GET /repos/${{ github.repository }}/milestones
         env:
@@ -103,7 +103,7 @@ jobs:
     steps:
       - name: Getting issues data
         id: get_issues_data
-        uses: octokit/request-action@v2.1.7
+        uses: octokit/request-action@v2.1.9
         with:
           route: GET /repos/yumemi-inc/android-engineer-codecheck/issues
           sort: created
@@ -125,7 +125,7 @@ jobs:
     steps:
       - name: Getting issues data
         id: get_issues_data
-        uses: octokit/request-action@v2.1.7
+        uses: octokit/request-action@v2.1.9
         with:
           route: GET /repos/${{ github.repository }}/issues
           state: all

@@ -3,12 +3,12 @@ root = true
 [*]
 charset = utf-8
 end_of_line = lf
-indent_size = 4
+indent_size = 2
 indent_style = space
 insert_final_newline = false
 max_line_length = 80
-tab_width = 4
-ij_continuation_indent_size = 8
+tab_width = 2
+ij_continuation_indent_size = 4
 ij_formatter_off_tag = @formatter:off
 ij_formatter_on_tag = @formatter:on
 ij_formatter_tags_enabled = false
@@ -17,7 +17,7 @@ ij_visual_guides = none
 ij_wrap_on_typing = false
 
 [{*.ant,*.fxml,*.jhm,*.jnlp,*.jrxml,*.rng,*.tld,*.wsdl,*.xml,*.xsd,*.xsl,*.xslt,*.xul}]
-ij_continuation_indent_size = 4
+ij_continuation_indent_size = 2
 ij_xml_align_attributes = false
 ij_xml_align_text = false
 ij_xml_attribute_wrap = normal
@@ -38,7 +38,6 @@ ij_xml_text_wrap = normal
 ij_xml_use_custom_settings = true
 
 [{*.apinotes,*.yaml,*.yml}]
-indent_size = 2
 ij_yaml_align_values_properties = do_not_align
 ij_yaml_autoinsert_sequence_marker = true
 ij_yaml_block_mapping_on_new_line = false

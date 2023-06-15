@@ -1,6 +1,6 @@
 package jp.co.yumemi.android.code_check
 
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 /**

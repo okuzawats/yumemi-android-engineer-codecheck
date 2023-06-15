@@ -15,7 +15,7 @@
 - IDE：Android Studio Flamingo | 2022.2.1 Patch 2
 - Kotlin：1.6.21
 - Java：17
-- Gradle：8.0
+- Gradle：8.1.1
 - minSdk：23
 - targetSdk：31
 

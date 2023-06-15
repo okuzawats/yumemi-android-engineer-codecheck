@@ -25,7 +25,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-      - run: ./gradlew ktlintCheck
+      - run: ./gradlew ktlint
       - uses: MeilCli/danger-action@v5
         with:
           plugins_file: 'Gemfile'

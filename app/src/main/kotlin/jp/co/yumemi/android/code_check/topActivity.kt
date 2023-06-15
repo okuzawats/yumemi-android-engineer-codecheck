@@ -4,7 +4,7 @@
 package jp.co.yumemi.android.code_check
 
 import androidx.appcompat.app.AppCompatActivity
-import java.util.*
+import java.util.Date
 
 class TopActivity : AppCompatActivity(R.layout.activity_top) {
 

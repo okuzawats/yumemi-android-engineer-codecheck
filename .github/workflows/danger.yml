@@ -29,3 +29,8 @@ jobs:
           danger_id: 'danger-pr'
         env:
           DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: okuzawats/chatwork-messaging-action@v1.0
+        with:
+          apiToken: ${{ secrets.API_KEY }}
+          roomId: ${{ secrets.ROOM_ID }}
+          message: 'Danger worked!'

@@ -16,6 +16,10 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
       - run: ./gradlew ktlint
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ktlint-output
+          path: 'app/build/ktlint.xml'
 
   androidLint:
     runs-on: ubuntu-latest
@@ -28,6 +32,10 @@ jobs:
           java-version: '17'
       - run: ./gradlew lintDebug
         continue-on-error: true
+      - uses: actions/upload-artifact@v3
+        with:
+          name: androidlint-output
+          path: 'app/build/reports/lint-results-debug.xml'
 
   danger:
     runs-on: ubuntu-latest
@@ -37,6 +45,14 @@ jobs:
       - androidLint
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: ktlint-output
+          path: 'app/build/'
+      - uses: actions/download-artifact@v3
+        with:
+          name: androidlint-output
+          path: 'app/build/reports/'
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2.2'

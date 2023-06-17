@@ -16,8 +16,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codecheck.databinding.FragmentOneBinding
 
+@AndroidEntryPoint
 class OneFragment : Fragment(R.layout.fragment_one) {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

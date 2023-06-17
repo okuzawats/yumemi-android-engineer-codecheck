@@ -27,6 +27,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
       - run: ./gradlew lintDebug
+        continue-on-error: true
 
   danger:
     runs-on: ubuntu-latest

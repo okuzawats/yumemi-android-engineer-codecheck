@@ -6,3 +6,5 @@ end
 
 checkstyle_format.base_path = Dir.pwd
 checkstyle_format.report 'app/build/ktlint.xml'
+
+android_lint.report_file = "app/build/reports/lint-results-debug.xml"

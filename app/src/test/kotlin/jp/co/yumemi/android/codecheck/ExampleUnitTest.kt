@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check
+package jp.co.yumemi.android.codecheck
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

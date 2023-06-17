@@ -1,7 +1,8 @@
 plugins {
   id 'com.android.application'
   id 'kotlin-android'
-  id 'kotlin-kapt'
+  // FIXME androidLint実行時にkaptがJDKバージョン 19を使ってエラーになってしまうため
+  // id 'kotlin-kapt'
   id 'kotlin-parcelize'
   id 'androidx.navigation.safeargs.kotlin'
 }
@@ -35,6 +36,9 @@ android {
   }
   buildFeatures {
     viewBinding true
+  }
+  lintOptions {
+    xmlReport true
   }
 }
 

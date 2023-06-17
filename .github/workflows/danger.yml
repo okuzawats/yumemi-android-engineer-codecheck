@@ -6,11 +6,53 @@ on:
       - main
 
 jobs:
-  danger:
+  ktlint:
     runs-on: ubuntu-latest
     if: github.event_name  == 'pull_request'
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - run: ./gradlew ktlint
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ktlint-output
+          path: 'app/build/ktlint.xml'
+
+  androidLint:
+    runs-on: ubuntu-latest
+    if: github.event_name  == 'pull_request'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - run: ./gradlew lintDebug
+        continue-on-error: true
+      - uses: actions/upload-artifact@v3
+        with:
+          name: androidlint-output
+          path: 'app/build/reports/lint-results-debug.xml'
+
+  danger:
+    runs-on: ubuntu-latest
+    if: github.event_name  == 'pull_request'
+    needs:
+      - ktlint
+      - androidLint
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: ktlint-output
+          path: 'app/build/'
+      - uses: actions/download-artifact@v3
+        with:
+          name: androidlint-output
+          path: 'app/build/reports/'
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2.2'
@@ -21,11 +63,6 @@ jobs:
           key: ${{ runner.os }}-gems-${{ hashFiles('Gemfile') }}
           restore-keys: |
             ${{ runner.os }}-gems-
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-      - run: ./gradlew ktlint
       - uses: MeilCli/danger-action@v5
         with:
           plugins_file: 'Gemfile'

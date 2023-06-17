@@ -32,7 +32,7 @@ class OneFragment : Fragment(R.layout.fragment_one) {
       DividerItemDecoration(context!!, _layoutManager.orientation)
     val _adapter =
       CustomAdapter(object : CustomAdapter.OnItemClickListener {
-        override fun itemClick(item: item) {
+        override fun itemClick(item: Item) {
           gotoRepositoryFragment(item)
         }
       })
@@ -57,31 +57,31 @@ class OneFragment : Fragment(R.layout.fragment_one) {
     }
   }
 
-  fun gotoRepositoryFragment(item: item) {
+  fun gotoRepositoryFragment(item: Item) {
     val _action = OneFragmentDirections
       .actionRepositoriesFragmentToRepositoryFragment(item = item)
     findNavController().navigate(_action)
   }
 }
 
-val diff_util = object : DiffUtil.ItemCallback<item>() {
-  override fun areItemsTheSame(oldItem: item, newItem: item): Boolean {
+val diff_util = object : DiffUtil.ItemCallback<Item>() {
+  override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
     return oldItem.name == newItem.name
   }
 
-  override fun areContentsTheSame(oldItem: item, newItem: item): Boolean {
+  override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
     return oldItem == newItem
   }
 }
 
 class CustomAdapter(
   private val itemClickListener: OnItemClickListener
-) : ListAdapter<item, CustomAdapter.ViewHolder>(diff_util) {
+) : ListAdapter<Item, CustomAdapter.ViewHolder>(diff_util) {
 
   class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
   interface OnItemClickListener {
-    fun itemClick(item: item)
+    fun itemClick(item: Item)
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

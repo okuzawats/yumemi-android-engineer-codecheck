@@ -17,7 +17,7 @@ class OneViewModel(
 ) : ViewModel() {
 
   // 検索結果
-  fun searchResults(inputText: String): List<item> = runBlocking {
+  fun searchResults(inputText: String): List<Item> = runBlocking {
     return@runBlocking emptyList()
 
     // FIXME 以下は要修正
@@ -76,7 +76,7 @@ class OneViewModel(
 }
 
 @Parcelize
-data class item(
+data class Item(
   val name: String,
   val ownerIconUrl: String,
   val language: String,

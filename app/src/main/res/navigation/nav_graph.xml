@@ -24,5 +24,4 @@
       android:name="item"
       app:argType="jp.co.yumemi.android.codecheck.Item" />
   </fragment>
-
 </navigation>

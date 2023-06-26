@@ -32,7 +32,7 @@ interface ImageLoader {
 class ImageLoaderImpl @Inject constructor() : ImageLoader {
   override fun load(
     imageUrl: ImageLoader.ImageUrl,
-  ): ImageLoader.Builder {
+  ) : ImageLoader.Builder {
     return ImageLoaderBuilder().also {
       it.load(imageUrl = imageUrl)
     }

@@ -43,7 +43,10 @@ class RepositoryDetailFragment :
       .load(ImageLoader.ImageUrl(repository.ownerIconUrl))
       .into(binding.ownerIconView)
     binding.nameView.text = repository.name
-    binding.languageView.text = getString(R.string.written_language, repository.language)
+    binding.languageView.text = getString(
+      R.string.written_language,
+      repository.language,
+    )
     binding.starsView.text = resources.getQuantityString(
       R.plurals.repository_star,
       repository.stargazersCount.toInt(),

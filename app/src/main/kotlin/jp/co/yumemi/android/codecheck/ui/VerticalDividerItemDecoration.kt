@@ -11,4 +11,4 @@ import javax.inject.Inject
  */
 class VerticalDividerItemDecoration @Inject constructor(
   @ApplicationContext context: Context,
-): DividerItemDecoration(context, RecyclerView.VERTICAL)
+) : DividerItemDecoration(context, RecyclerView.VERTICAL)

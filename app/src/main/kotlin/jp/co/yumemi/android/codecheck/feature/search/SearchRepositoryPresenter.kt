@@ -16,7 +16,9 @@ class SearchRepositoryPresenter @Inject constructor(
   private val navigator: SearchRepositoryNavigator,
   private val scope: CoroutineScope,
 ) : SearchRepositoryContract.Presenter {
-  override fun onSearchAction(query: String) {
+  override fun onSearchAction(
+    query: String,
+  ) {
     searchRepositoryUseCase(query)
       .onEach {
         view.showRepositories(it)

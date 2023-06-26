@@ -33,6 +33,11 @@ class RepositoryDetailFragment :
     presenter.onEntered()
   }
 
+  override fun onDestroyView() {
+    _binding = null
+    super.onDestroyView()
+  }
+
   override fun showRepository(repository: Repository) {
     imageLoader
       .load(ImageLoader.ImageUrl(repository.ownerIconUrl))

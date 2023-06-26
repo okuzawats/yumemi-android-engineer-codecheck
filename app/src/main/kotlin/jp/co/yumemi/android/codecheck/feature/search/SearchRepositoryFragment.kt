@@ -5,13 +5,13 @@ package jp.co.yumemi.android.codecheck.feature.search
 
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.Repository
 import jp.co.yumemi.android.codecheck.databinding.FragmentSearchRepositoryBinding
+import jp.co.yumemi.android.codecheck.ui.setOnSearchActionListener
 import javax.inject.Inject
 
 /**
@@ -26,12 +26,13 @@ class SearchRepositoryFragment :
   lateinit var presenter: SearchRepositoryPresenter
 
   @Inject
-  lateinit var dividerItemDecoration: DividerItemDecoration
-
-  @Inject
   lateinit var adapter: SearchRepositoryAdapter
 
+  @Inject
+  lateinit var dividerItemDecoration: DividerItemDecoration
+
   private var _binding: FragmentSearchRepositoryBinding? = null
+
   private val binding: FragmentSearchRepositoryBinding
     get() = checkNotNull(_binding)
 
@@ -41,14 +42,9 @@ class SearchRepositoryFragment :
     binding.recyclerView.addItemDecoration(dividerItemDecoration)
     binding.recyclerView.adapter = adapter
 
-    binding.searchInputText
-      .setOnEditorActionListener { editText, action, _ ->
-        if (action == EditorInfo.IME_ACTION_SEARCH) {
-          presenter.onSearchAction(query = editText.text.toString())
-          return@setOnEditorActionListener true
-        }
-        return@setOnEditorActionListener false
-      }
+    binding.searchInputText.setOnSearchActionListener { editText ->
+      presenter.onSearchAction(query = editText.text.toString())
+    }
   }
 
   override fun onDestroyView() {

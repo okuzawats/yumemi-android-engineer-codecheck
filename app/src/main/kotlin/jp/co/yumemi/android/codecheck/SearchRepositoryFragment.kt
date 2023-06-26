@@ -27,7 +27,7 @@ class SearchRepositoryFragment : Fragment(R.layout.fragment_search_repository) {
 
     val _binding = FragmentSearchRepositoryBinding.bind(view)
 
-    val _viewModel = OneViewModel(context!!)
+    val _viewModel = SearchRepositoryViewModel(context!!)
 
     val _layoutManager = LinearLayoutManager(context!!)
     val _dividerItemDecoration =

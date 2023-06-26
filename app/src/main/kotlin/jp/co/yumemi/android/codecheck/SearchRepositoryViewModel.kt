@@ -12,7 +12,7 @@ import kotlinx.parcelize.Parcelize
 /**
  * TwoFragment で使う
  */
-class OneViewModel(
+class SearchRepositoryViewModel(
   val context: Context
 ) : ViewModel() {
 

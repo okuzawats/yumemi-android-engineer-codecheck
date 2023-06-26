@@ -19,5 +19,10 @@ interface RepositoryDetailContract {
   /**
    * リポジトリ詳細画面のPresenterを定義するinterface
    */
-  interface Presenter
+  interface Presenter {
+    /**
+     * 表示された
+     */
+    fun onEntered()
+  }
 }

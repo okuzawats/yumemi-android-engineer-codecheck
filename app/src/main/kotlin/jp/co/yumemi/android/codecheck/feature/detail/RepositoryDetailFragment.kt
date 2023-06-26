@@ -11,11 +11,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.Repository
 import jp.co.yumemi.android.codecheck.databinding.FragmentRepositoryDetailBinding
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RepositoryDetailFragment :
   Fragment(R.layout.fragment_repository_detail),
   RepositoryDetailContract.View {
+
+  @Inject
+  lateinit var presenter: RepositoryDetailPresenter
 
   private var _binding: FragmentRepositoryDetailBinding? = null
   private val binding: FragmentRepositoryDetailBinding
@@ -23,6 +27,7 @@ class RepositoryDetailFragment :
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     _binding = FragmentRepositoryDetailBinding.bind(view)
+    presenter.onEntered()
   }
 
   override fun showRepository(repository: Repository) {

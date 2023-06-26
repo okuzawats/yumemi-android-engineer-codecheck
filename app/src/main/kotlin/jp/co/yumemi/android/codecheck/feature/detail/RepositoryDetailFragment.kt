@@ -43,22 +43,26 @@ class RepositoryDetailFragment :
       .load(ImageLoader.ImageUrl(repository.ownerIconUrl))
       .into(binding.ownerIconView)
     binding.nameView.text = repository.name
-    binding.languageView.text = repository.language
-    binding.starsView.text = getString(
-      R.string.repository_stars,
-      repository.stargazersCount,
+    binding.languageView.text = getString(R.string.written_language, repository.language)
+    binding.starsView.text = resources.getQuantityString(
+      R.plurals.repository_star,
+      repository.stargazersCount.toInt(),
+      repository.stargazersCount.toInt(),
     )
-    binding.watchersView.text = getString(
-      R.string.repository_watchers,
-      repository.watchersCount,
+    binding.watchersView.text = resources.getQuantityString(
+      R.plurals.repository_watcher,
+      repository.watchersCount.toInt(),
+      repository.watchersCount.toInt(),
     )
-    binding.forksView.text = getString(
-      R.string.repository_forks,
-      repository.forksCount,
+    binding.forksView.text = resources.getQuantityString(
+      R.plurals.repository_fork,
+      repository.forksCount.toInt(),
+      repository.forksCount.toInt(),
     )
-    binding.openIssuesView.text = getString(
-      R.string.repository_open_issues,
-      repository.openIssuesCount,
+    binding.openIssuesView.text = resources.getQuantityString(
+      R.plurals.repository_open_issue,
+      repository.openIssuesCount.toInt(),
+      repository.openIssuesCount.toInt(),
     )
   }
 }

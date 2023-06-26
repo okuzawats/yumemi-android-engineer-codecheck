@@ -1,9 +1,10 @@
 /*
  * Copyright © 2021 YUMEMI Inc. All rights reserved.
  */
-package jp.co.yumemi.android.codecheck
+package jp.co.yumemi.android.codecheck.feature.search
 
 import androidx.lifecycle.ViewModel
+import jp.co.yumemi.android.codecheck.Repository
 import kotlinx.coroutines.runBlocking
 
 /**

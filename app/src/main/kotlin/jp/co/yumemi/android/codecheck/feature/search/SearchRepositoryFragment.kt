@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.Repository
-import jp.co.yumemi.android.codecheck.SearchRepositoryViewModel
 import jp.co.yumemi.android.codecheck.databinding.FragmentSearchRepositoryBinding
 
 @AndroidEntryPoint

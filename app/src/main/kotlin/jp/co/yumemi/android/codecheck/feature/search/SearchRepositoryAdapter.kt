@@ -1,12 +1,12 @@
 package jp.co.yumemi.android.codecheck.feature.search
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.Repository
 import jp.co.yumemi.android.codecheck.databinding.LayoutRepositoryBinding
+import jp.co.yumemi.android.codecheck.ui.inflateView
 
 /**
  * リポジトリ検索画面のリスト表示のためのAdapter
@@ -19,9 +19,7 @@ class SearchRepositoryAdapter(
     parent: ViewGroup,
     viewType: Int,
   ): SearchRepositoryViewHolder {
-    val view = LayoutInflater.from(parent.context).inflate(
-      R.layout.layout_repository, parent, false
-    )
+    val view = parent.inflateView(R.layout.layout_repository)
     val binding = LayoutRepositoryBinding.bind(view)
     return SearchRepositoryViewHolder(binding = binding)
   }

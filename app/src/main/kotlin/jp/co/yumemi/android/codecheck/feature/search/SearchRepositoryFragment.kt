@@ -15,29 +15,40 @@ import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.Repository
 import jp.co.yumemi.android.codecheck.databinding.FragmentSearchRepositoryBinding
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class SearchRepositoryFragment : Fragment(R.layout.fragment_search_repository) {
+class SearchRepositoryFragment :
+  Fragment(R.layout.fragment_search_repository),
+  SearchRepositoryContract.View {
+
+  @Inject
+  lateinit var presenter: SearchRepositoryPresenter
 
   private val viewModel: SearchRepositoryViewModel by viewModels()
 
   private val adapter: SearchRepositoryAdapter by lazy {
     SearchRepositoryAdapter(
       onRepositoryClicked = {
-        gotoRepositoryFragment(repository = it)
+        presenter.onRepositorySelected(repository = it)
       },
       searchRepositoryDiffUtilProvider = SearchRepositoryDiffUtilProvider(),
     )
   }
 
   private var _binding: FragmentSearchRepositoryBinding? = null
-  private val binding:FragmentSearchRepositoryBinding get() = checkNotNull(_binding)
+  private val binding: FragmentSearchRepositoryBinding
+    get() = checkNotNull(
+      _binding
+    )
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     _binding = FragmentSearchRepositoryBinding.bind(view)
 
-    val orientation = (binding.recyclerView.layoutManager as LinearLayoutManager).orientation
-    val dividerItemDecoration = DividerItemDecoration(requireContext(), orientation)
+    val orientation =
+      (binding.recyclerView.layoutManager as LinearLayoutManager).orientation
+    val dividerItemDecoration =
+      DividerItemDecoration(requireContext(), orientation)
 
     binding.searchInputText
       .setOnEditorActionListener { editText, action, _ ->

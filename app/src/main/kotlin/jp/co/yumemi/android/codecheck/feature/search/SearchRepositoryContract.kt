@@ -16,12 +16,16 @@ interface SearchRepositoryContract {
    */
   interface Presenter {
     /**
-     * 検索実行アクションが実行された
+     * リポジトリの検索実行アクションが実行された。
+     *
+     * @param query 検索語句
      */
     fun onSearchAction(query: String)
 
     /**
-     * リポジトリが選択された
+     * リポジトリが選択された.
+     *
+     * @param repository 選択されたリポジトリ
      */
     fun onRepositorySelected(repository: Repository)
   }

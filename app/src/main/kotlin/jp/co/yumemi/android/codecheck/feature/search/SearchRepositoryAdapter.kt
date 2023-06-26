@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.Repository
 import jp.co.yumemi.android.codecheck.databinding.LayoutRepositoryBinding
-import javax.inject.Inject
 
 /**
  * リポジトリ検索画面のリスト表示のためのAdapter

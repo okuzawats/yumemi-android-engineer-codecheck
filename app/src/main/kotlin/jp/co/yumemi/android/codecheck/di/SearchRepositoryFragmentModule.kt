@@ -1,6 +1,7 @@
 package jp.co.yumemi.android.codecheck.di
 
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,6 +12,7 @@ import jp.co.yumemi.android.codecheck.feature.search.SearchRepositoryFragment
 import jp.co.yumemi.android.codecheck.feature.search.SearchRepositoryNavigator
 import jp.co.yumemi.android.codecheck.feature.search.SearchRepositoryPresenter
 import jp.co.yumemi.android.codecheck.navigation.DefaultSearchRepositoryNavigator
+import kotlinx.coroutines.CoroutineScope
 
 @Module
 @InstallIn(FragmentComponent::class)
@@ -26,6 +28,12 @@ class SearchRepositoryFragmentModule {
   fun provideSearchRepositoryView(
     searchRepositoryFragment: SearchRepositoryFragment,
   ): SearchRepositoryContract.View = searchRepositoryFragment
+
+  @Provides
+  @FragmentScoped
+  fun provideFragmentScope(
+    searchRepositoryFragment: SearchRepositoryFragment,
+  ): CoroutineScope = searchRepositoryFragment.lifecycleScope
 
   @Provides
   @FragmentScoped

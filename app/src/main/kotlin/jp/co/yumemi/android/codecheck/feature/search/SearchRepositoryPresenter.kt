@@ -20,9 +20,7 @@ class SearchRepositoryPresenter @Inject constructor(
     query: String,
   ) {
     searchRepositoryUseCase(query)
-      .onEach {
-        view.showRepositories(it)
-      }
+      .onEach(view::showRepositories)
       .launchIn(scope)
   }
 

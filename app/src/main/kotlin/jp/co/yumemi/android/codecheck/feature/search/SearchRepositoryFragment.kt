@@ -25,9 +25,7 @@ class SearchRepositoryFragment :
 
   private val adapter: SearchRepositoryAdapter by lazy {
     SearchRepositoryAdapter(
-      onRepositoryClicked = {
-        presenter.onRepositorySelected(repository = it)
-      },
+      onRepositoryClicked = presenter::onRepositorySelected,
       searchRepositoryDiffUtilProvider = SearchRepositoryDiffUtilProvider(),
     )
   }

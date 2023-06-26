@@ -1,7 +1,7 @@
 /*
  * Copyright © 2021 YUMEMI Inc. All rights reserved.
  */
-package jp.co.yumemi.android.codecheck
+package jp.co.yumemi.android.codecheck.feature.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,6 +18,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
+import jp.co.yumemi.android.codecheck.R
+import jp.co.yumemi.android.codecheck.Repository
+import jp.co.yumemi.android.codecheck.SearchRepositoryViewModel
 import jp.co.yumemi.android.codecheck.databinding.FragmentSearchRepositoryBinding
 
 @AndroidEntryPoint
@@ -61,8 +64,8 @@ class SearchRepositoryFragment : Fragment(R.layout.fragment_search_repository) {
   }
 
   fun gotoRepositoryFragment(repository: Repository) {
-    val _action = SearchRepositoryFragmentDirections
-      .toRepositoryDetail(repository = repository)
+    val _action =
+      SearchRepositoryFragmentDirections.toRepositoryDetail(repository = repository)
     findNavController().navigate(_action)
   }
 }

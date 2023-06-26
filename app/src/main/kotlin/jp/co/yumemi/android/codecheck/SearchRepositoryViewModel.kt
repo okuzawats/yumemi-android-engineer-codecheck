@@ -3,10 +3,8 @@
  */
 package jp.co.yumemi.android.codecheck
 
-import android.os.Parcelable
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.runBlocking
-import kotlinx.parcelize.Parcelize
 
 /**
  * TwoFragment で使う
@@ -14,7 +12,7 @@ import kotlinx.parcelize.Parcelize
 class SearchRepositoryViewModel : ViewModel() {
 
   // 検索結果
-  fun searchResults(inputText: String): List<Item> = runBlocking {
+  fun searchResults(inputText: String): List<Repository> = runBlocking {
     return@runBlocking emptyList()
 
     // FIXME 以下は要修正
@@ -71,14 +69,3 @@ class SearchRepositoryViewModel : ViewModel() {
 //    }.await()
   }
 }
-
-@Parcelize
-data class Item(
-  val name: String,
-  val ownerIconUrl: String,
-  val language: String,
-  val stargazersCount: Long,
-  val watchersCount: Long,
-  val forksCount: Long,
-  val openIssuesCount: Long
-) : Parcelable

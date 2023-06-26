@@ -44,9 +44,21 @@ class RepositoryDetailFragment :
       .into(binding.ownerIconView)
     binding.nameView.text = repository.name
     binding.languageView.text = repository.language
-    binding.starsView.text = getString(R.string.repository_stars, repository.stargazersCount)
-    binding.watchersView.text = getString(R.string.repository_watchers, repository.watchersCount)
-    binding.forksView.text = getString(R.string.repository_forks, repository.forksCount)
-    binding.openIssuesView.text = getString(R.string.repository_open_issues, repository.openIssuesCount)
+    binding.starsView.text = getString(
+      R.string.repository_stars,
+      repository.stargazersCount,
+    )
+    binding.watchersView.text = getString(
+      R.string.repository_watchers,
+      repository.watchersCount,
+    )
+    binding.forksView.text = getString(
+      R.string.repository_forks,
+      repository.forksCount,
+    )
+    binding.openIssuesView.text = getString(
+      R.string.repository_open_issues,
+      repository.openIssuesCount,
+    )
   }
 }

@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.Repository
 
@@ -14,18 +14,19 @@ import jp.co.yumemi.android.codecheck.Repository
  */
 class SearchRepositoryAdapter(
   private val itemClickListener: OnItemClickListener
-) : ListAdapter<Repository, SearchRepositoryAdapter.ViewHolder>(diff_util) {
-
-  class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+) : ListAdapter<Repository, ViewHolder>(diff_util) {
 
   interface OnItemClickListener {
     fun itemClick(repository: Repository)
   }
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+  override fun onCreateViewHolder(
+    parent: ViewGroup,
+    viewType: Int
+  ): ViewHolder {
     val _view = LayoutInflater.from(parent.context)
       .inflate(R.layout.layout_item, parent, false)
-    return ViewHolder(_view)
+    return SearchRepositoryViewHolder(_view)
   }
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {

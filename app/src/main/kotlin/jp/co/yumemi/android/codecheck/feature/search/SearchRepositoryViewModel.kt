@@ -1,23 +1,19 @@
 /*
  * Copyright © 2021 YUMEMI Inc. All rights reserved.
  */
-package jp.co.yumemi.android.codecheck
+package jp.co.yumemi.android.codecheck.feature.search
 
-import android.content.Context
-import android.os.Parcelable
 import androidx.lifecycle.ViewModel
+import jp.co.yumemi.android.codecheck.Repository
 import kotlinx.coroutines.runBlocking
-import kotlinx.parcelize.Parcelize
 
 /**
  * TwoFragment で使う
  */
-class OneViewModel(
-  val context: Context
-) : ViewModel() {
+class SearchRepositoryViewModel : ViewModel() {
 
   // 検索結果
-  fun searchResults(inputText: String): List<Item> = runBlocking {
+  fun searchResults(inputText: String): List<Repository> = runBlocking {
     return@runBlocking emptyList()
 
     // FIXME 以下は要修正
@@ -74,14 +70,3 @@ class OneViewModel(
 //    }.await()
   }
 }
-
-@Parcelize
-data class Item(
-  val name: String,
-  val ownerIconUrl: String,
-  val language: String,
-  val stargazersCount: Long,
-  val watchersCount: Long,
-  val forksCount: Long,
-  val openIssuesCount: Long
-) : Parcelable

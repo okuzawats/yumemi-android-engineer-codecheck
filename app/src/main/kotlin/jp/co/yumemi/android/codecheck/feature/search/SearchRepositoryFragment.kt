@@ -25,10 +25,13 @@ class SearchRepositoryFragment :
   @Inject
   lateinit var verticalDividerItemDecoration: VerticalDividerItemDecoration
 
+  @Inject
+  lateinit var searchRepositoryDiffUtilProvider: SearchRepositoryDiffUtilProvider
+
   private val adapter: SearchRepositoryAdapter by lazy {
     SearchRepositoryAdapter(
       onRepositoryClicked = presenter::onRepositorySelected,
-      searchRepositoryDiffUtilProvider = SearchRepositoryDiffUtilProvider(),
+      searchRepositoryDiffUtilProvider = searchRepositoryDiffUtilProvider,
     )
   }
 

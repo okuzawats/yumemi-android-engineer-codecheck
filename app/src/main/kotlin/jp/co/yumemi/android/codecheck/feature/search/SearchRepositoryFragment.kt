@@ -43,6 +43,9 @@ class SearchRepositoryFragment :
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     _binding = FragmentSearchRepositoryBinding.bind(view)
 
+    binding.recyclerView.addItemDecoration(dividerItemDecoration)
+    binding.recyclerView.adapter = adapter
+
     binding.searchInputText
       .setOnEditorActionListener { editText, action, _ ->
         if (action == EditorInfo.IME_ACTION_SEARCH) {
@@ -51,11 +54,6 @@ class SearchRepositoryFragment :
         }
         return@setOnEditorActionListener false
       }
-
-    binding.recyclerView.also {
-      it.addItemDecoration(dividerItemDecoration)
-      it.adapter = adapter
-    }
   }
 
   override fun onDestroyView() {

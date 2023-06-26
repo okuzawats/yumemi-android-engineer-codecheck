@@ -6,11 +6,13 @@ import javax.inject.Inject
 /**
  * [SearchRepositoryContract.Presenter]の実装クラス
  */
-class SearchRepositoryPresenter @Inject constructor() :
+class SearchRepositoryPresenter @Inject constructor(
+  private val navigator: SearchRepositoryNavigator,
+) :
   SearchRepositoryContract.Presenter {
   override fun onRepositorySelected(
     repository: Repository,
   ) {
-    // TODO
+    navigator.toRepositoryDetail(repository = repository)
   }
 }

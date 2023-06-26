@@ -11,9 +11,6 @@ import javax.inject.Inject
 
 /**
  * リポジトリ検索画面のリスト表示のためのAdapter
- *
- * @param presenter Presenter
- * @param searchRepositoryDiffUtilProvider DiffUtil
  */
 class SearchRepositoryAdapter(
   private val presenter: SearchRepositoryContract.Presenter,

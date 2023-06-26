@@ -14,6 +14,9 @@ import jp.co.yumemi.android.codecheck.Repository
 import jp.co.yumemi.android.codecheck.databinding.FragmentSearchRepositoryBinding
 import javax.inject.Inject
 
+/**
+ * リポジトリ検索画面のFragment
+ */
 @AndroidEntryPoint
 class SearchRepositoryFragment :
   Fragment(R.layout.fragment_search_repository),

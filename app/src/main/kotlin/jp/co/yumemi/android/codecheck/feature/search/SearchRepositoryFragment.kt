@@ -30,13 +30,16 @@ class SearchRepositoryFragment : Fragment(R.layout.fragment_search_repository) {
     )
   }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    val _binding = FragmentSearchRepositoryBinding.bind(view)
+  private var _binding: FragmentSearchRepositoryBinding? = null
+  private val binding:FragmentSearchRepositoryBinding get() = checkNotNull(_binding)
 
-    val orientation = (_binding.recyclerView.layoutManager as LinearLayoutManager).orientation
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    _binding = FragmentSearchRepositoryBinding.bind(view)
+
+    val orientation = (binding.recyclerView.layoutManager as LinearLayoutManager).orientation
     val dividerItemDecoration = DividerItemDecoration(requireContext(), orientation)
 
-    _binding.searchInputText
+    binding.searchInputText
       .setOnEditorActionListener { editText, action, _ ->
         if (action == EditorInfo.IME_ACTION_SEARCH) {
           editText.text.toString().let {
@@ -49,10 +52,16 @@ class SearchRepositoryFragment : Fragment(R.layout.fragment_search_repository) {
         return@setOnEditorActionListener false
       }
 
-    _binding.recyclerView.also {
+    binding.recyclerView.also {
       it.addItemDecoration(dividerItemDecoration)
       it.adapter = adapter
     }
+  }
+
+  override fun onDestroyView() {
+    binding.recyclerView.adapter = null
+    _binding = null
+    super.onDestroyView()
   }
 
   fun gotoRepositoryFragment(repository: Repository) {

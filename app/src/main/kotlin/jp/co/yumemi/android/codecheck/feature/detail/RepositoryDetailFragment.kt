@@ -13,7 +13,9 @@ import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.databinding.FragmentRepositoryDetailBinding
 
 @AndroidEntryPoint
-class RepositoryDetailFragment : Fragment(R.layout.fragment_repository_detail) {
+class RepositoryDetailFragment :
+  Fragment(R.layout.fragment_repository_detail),
+  RepositoryDetailContract.View {
 
   private val args: RepositoryDetailFragmentArgs by navArgs()
 

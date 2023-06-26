@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -22,12 +23,12 @@ import jp.co.yumemi.android.codecheck.databinding.FragmentSearchRepositoryBindin
 @AndroidEntryPoint
 class SearchRepositoryFragment : Fragment(R.layout.fragment_search_repository) {
 
+  private val viewModel: SearchRepositoryViewModel by viewModels()
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
     val _binding = FragmentSearchRepositoryBinding.bind(view)
-
-    val _viewModel = SearchRepositoryViewModel(context!!)
 
     val _layoutManager = LinearLayoutManager(context!!)
     val _dividerItemDecoration =
@@ -43,7 +44,7 @@ class SearchRepositoryFragment : Fragment(R.layout.fragment_search_repository) {
       .setOnEditorActionListener { editText, action, _ ->
         if (action == EditorInfo.IME_ACTION_SEARCH) {
           editText.text.toString().let {
-            _viewModel.searchResults(it).apply {
+            viewModel.searchResults(it).apply {
               _adapter.submitList(this)
             }
           }

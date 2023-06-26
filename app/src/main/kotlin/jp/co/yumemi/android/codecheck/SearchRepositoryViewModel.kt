@@ -3,7 +3,6 @@
  */
 package jp.co.yumemi.android.codecheck
 
-import android.content.Context
 import android.os.Parcelable
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.runBlocking
@@ -12,9 +11,7 @@ import kotlinx.parcelize.Parcelize
 /**
  * TwoFragment で使う
  */
-class SearchRepositoryViewModel(
-  val context: Context
-) : ViewModel() {
+class SearchRepositoryViewModel : ViewModel() {
 
   // 検索結果
   fun searchResults(inputText: String): List<Item> = runBlocking {

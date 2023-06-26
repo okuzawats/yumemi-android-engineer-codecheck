@@ -3,8 +3,8 @@ package jp.co.yumemi.android.codecheck.feature.search
 import jp.co.yumemi.android.codecheck.Repository
 import jp.co.yumemi.android.codecheck.usecase.search.SearchRepositoryUseCase
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -17,12 +17,11 @@ class SearchRepositoryPresenter @Inject constructor(
   private val scope: CoroutineScope,
 ) : SearchRepositoryContract.Presenter {
   override fun onSearchAction(query: String) {
-    scope.launch {
-      searchRepositoryUseCase(query)
-        .onEach {
-          view.showRepositories(it)
-        }
-    }
+    searchRepositoryUseCase(query)
+      .onEach {
+        view.showRepositories(it)
+      }
+      .launchIn(scope)
   }
 
   override fun onRepositorySelected(

@@ -17,15 +17,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
-import jp.co.yumemi.android.codecheck.databinding.FragmentOneBinding
+import jp.co.yumemi.android.codecheck.databinding.FragmentSearchRepositoryBinding
 
 @AndroidEntryPoint
-class OneFragment : Fragment(R.layout.fragment_one) {
+class SearchRepositoryFragment : Fragment(R.layout.fragment_search_repository) {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val _binding = FragmentOneBinding.bind(view)
+    val _binding = FragmentSearchRepositoryBinding.bind(view)
 
     val _viewModel = OneViewModel(context!!)
 
@@ -60,7 +60,7 @@ class OneFragment : Fragment(R.layout.fragment_one) {
   }
 
   fun gotoRepositoryFragment(item: Item) {
-    val _action = OneFragmentDirections
+    val _action = SearchRepositoryFragmentDirections
       .actionRepositoriesFragmentToRepositoryFragment(item = item)
     findNavController().navigate(_action)
   }

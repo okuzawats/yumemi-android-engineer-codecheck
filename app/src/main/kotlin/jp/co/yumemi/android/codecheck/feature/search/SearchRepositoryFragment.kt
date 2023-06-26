@@ -25,8 +25,6 @@ class SearchRepositoryFragment :
   @Inject
   lateinit var presenter: SearchRepositoryPresenter
 
-  private val viewModel: SearchRepositoryViewModel by viewModels()
-
   private val adapter: SearchRepositoryAdapter by lazy {
     SearchRepositoryAdapter(
       onRepositoryClicked = {
@@ -51,11 +49,6 @@ class SearchRepositoryFragment :
     binding.searchInputText
       .setOnEditorActionListener { editText, action, _ ->
         if (action == EditorInfo.IME_ACTION_SEARCH) {
-//          editText.text.toString().let {
-//            viewModel.searchResults(it).apply {
-//              adapter.submitList(this)
-//            }
-//          }
           presenter.onSearchAction(query = editText.text.toString())
           return@setOnEditorActionListener true
         }
@@ -72,6 +65,10 @@ class SearchRepositoryFragment :
     binding.recyclerView.adapter = null
     _binding = null
     super.onDestroyView()
+  }
+
+  override fun showRepositories(repositories: List<Repository>) {
+    adapter.submitList(repositories)
   }
 
   fun gotoRepositoryFragment(repository: Repository) {

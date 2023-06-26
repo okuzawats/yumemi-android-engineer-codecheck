@@ -9,7 +9,14 @@ interface SearchRepositoryContract {
   /**
    * リポジトリ検索画面のViewを定義するinterface
    */
-  interface View
+  interface View {
+    /**
+     * リポジトリの一覧を表示する。
+     *
+     * @param repositories [Repository]のリスト
+     */
+    fun showRepositories(repositories: List<Repository>)
+  }
 
   /**
    * リポジトリ検索画面のPresenterを定義するinterface

@@ -38,9 +38,7 @@ class SearchRepositoryFragment :
 
   private var _binding: FragmentSearchRepositoryBinding? = null
   private val binding: FragmentSearchRepositoryBinding
-    get() = checkNotNull(
-      _binding
-    )
+    get() = checkNotNull(_binding)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     _binding = FragmentSearchRepositoryBinding.bind(view)

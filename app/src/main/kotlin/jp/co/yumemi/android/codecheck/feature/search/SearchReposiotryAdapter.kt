@@ -1,13 +1,11 @@
 package jp.co.yumemi.android.codecheck.feature.search
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.Repository
+import jp.co.yumemi.android.codecheck.databinding.LayoutRepositoryBinding
 
 /**
  * リポジトリ検索画面のリスト表示のためのAdapter
@@ -18,28 +16,27 @@ import jp.co.yumemi.android.codecheck.Repository
 class SearchRepositoryAdapter(
   private val onRepositoryClicked: (Repository) -> Unit,
   searchRepositoryDiffUtilProvider: SearchRepositoryDiffUtilProvider,
-) : ListAdapter<Repository, ViewHolder>(
+) : ListAdapter<Repository, SearchRepositoryViewHolder>(
   searchRepositoryDiffUtilProvider.provide(),
 ) {
   override fun onCreateViewHolder(
     parent: ViewGroup,
     viewType: Int,
-  ): ViewHolder {
+  ): SearchRepositoryViewHolder {
     val view = LayoutInflater.from(parent.context).inflate(
-      R.layout.layout_item, parent, false
+      R.layout.layout_repository, parent, false
     )
-    return SearchRepositoryViewHolder(view)
+    val binding = LayoutRepositoryBinding.bind(view)
+    return SearchRepositoryViewHolder(binding = binding)
   }
 
   override fun onBindViewHolder(
-    holder: ViewHolder,
+    holder: SearchRepositoryViewHolder,
     position: Int,
   ) {
     val repository = getItem(position)
-    (holder.itemView.findViewById<View>(R.id.repositoryNameView) as TextView).text =
-      repository.name
-
-    holder.itemView.setOnClickListener {
+    holder.binding.repositoryNameView.text = repository.name
+    holder.binding.root.setOnClickListener {
       onRepositoryClicked(repository)
     }
   }

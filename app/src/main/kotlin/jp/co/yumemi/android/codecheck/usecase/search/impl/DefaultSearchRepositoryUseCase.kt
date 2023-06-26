@@ -20,8 +20,8 @@ class DefaultSearchRepositoryUseCase @Inject constructor() :
           watchersCount = 42L,
           forksCount = 42L,
           openIssuesCount = 42L,
-        )
-      )
+        ),
+      ),
     )
   }
 }

@@ -25,21 +25,22 @@ class SearchRepositoryAdapter(
     parent: ViewGroup,
     viewType: Int,
   ): ViewHolder {
-    val _view = LayoutInflater.from(parent.context)
-      .inflate(R.layout.layout_item, parent, false)
-    return SearchRepositoryViewHolder(_view)
+    val view = LayoutInflater.from(parent.context).inflate(
+      R.layout.layout_item, parent, false
+    )
+    return SearchRepositoryViewHolder(view)
   }
 
   override fun onBindViewHolder(
     holder: ViewHolder,
     position: Int,
   ) {
-    val _item = getItem(position)
+    val repository = getItem(position)
     (holder.itemView.findViewById<View>(R.id.repositoryNameView) as TextView).text =
-      _item.name
+      repository.name
 
     holder.itemView.setOnClickListener {
-      onRepositoryClicked(_item)
+      onRepositoryClicked(repository)
     }
   }
 }

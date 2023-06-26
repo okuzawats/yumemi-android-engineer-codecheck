@@ -9,7 +9,6 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,11 +31,8 @@ class SearchRepositoryFragment : Fragment(R.layout.fragment_search_repository) {
       DividerItemDecoration(context!!, _layoutManager.orientation)
     val _adapter =
       SearchRepositoryAdapter(
-        itemClickListener = object :
-          SearchRepositoryAdapter.OnItemClickListener {
-          override fun itemClick(repository: Repository) {
-            gotoRepositoryFragment(repository = repository)
-          }
+        onRepositoryClicked = {
+          gotoRepositoryFragment(repository = it)
         },
         searchRepositoryDiffUtilProvider = SearchRepositoryDiffUtilProvider(),
       )

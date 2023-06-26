@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import jp.co.yumemi.android.codecheck.R
@@ -12,15 +11,14 @@ import jp.co.yumemi.android.codecheck.Repository
 
 /**
  * リポジトリ検索画面のリスト表示のためのAdapter
+ *
+ * @param onRepositoryClicked リポジトリタップ時に発火するラムダ
+ * @param searchRepositoryDiffUtilProvider DiffUtil
  */
 class SearchRepositoryAdapter(
-  private val itemClickListener: OnItemClickListener,
+  private val onRepositoryClicked: (Repository) -> Unit,
   searchRepositoryDiffUtilProvider: SearchRepositoryDiffUtilProvider,
 ) : ListAdapter<Repository, ViewHolder>(searchRepositoryDiffUtilProvider.provide()) {
-
-  interface OnItemClickListener {
-    fun itemClick(repository: Repository)
-  }
 
   override fun onCreateViewHolder(
     parent: ViewGroup,
@@ -37,7 +35,7 @@ class SearchRepositoryAdapter(
       _item.name
 
     holder.itemView.setOnClickListener {
-      itemClickListener.itemClick(_item)
+      onRepositoryClicked(_item)
     }
   }
 }

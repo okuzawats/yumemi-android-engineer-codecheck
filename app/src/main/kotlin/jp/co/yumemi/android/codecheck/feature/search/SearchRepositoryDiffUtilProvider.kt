@@ -3,6 +3,9 @@ package jp.co.yumemi.android.codecheck.feature.search
 import androidx.recyclerview.widget.DiffUtil
 import jp.co.yumemi.android.codecheck.Repository
 
+/**
+ * [DiffUtil]のインスタンスを生成するためのクラス
+ */
 class SearchRepositoryDiffUtilProvider {
   fun provide(): DiffUtil.ItemCallback<Repository> {
     return object : DiffUtil.ItemCallback<Repository>() {

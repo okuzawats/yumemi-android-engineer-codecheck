@@ -1,9 +1,11 @@
 package jp.co.yumemi.android.codecheck.feature.search
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import jp.co.yumemi.android.codecheck.databinding.LayoutRepositoryBinding
 
 /**
  * リポジトリ検索画面のリスト表示のためのViewHolder
  */
-class SearchRepositoryViewHolder(view: View) : RecyclerView.ViewHolder(view)
+class SearchRepositoryViewHolder(
+  val binding: LayoutRepositoryBinding,
+) : RecyclerView.ViewHolder(binding.root)

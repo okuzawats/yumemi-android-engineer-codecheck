@@ -5,61 +5,55 @@ package jp.co.yumemi.android.codecheck.feature.search
 
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.Repository
 import jp.co.yumemi.android.codecheck.databinding.FragmentSearchRepositoryBinding
+import jp.co.yumemi.android.codecheck.ui.setOnSearchActionListener
+import javax.inject.Inject
 
+/**
+ * リポジトリ検索画面のFragment
+ */
 @AndroidEntryPoint
-class SearchRepositoryFragment : Fragment(R.layout.fragment_search_repository) {
+class SearchRepositoryFragment :
+  Fragment(R.layout.fragment_search_repository),
+  SearchRepositoryContract.View {
 
-  private val viewModel: SearchRepositoryViewModel by viewModels()
+  @Inject
+  lateinit var presenter: SearchRepositoryPresenter
+
+  @Inject
+  lateinit var adapter: SearchRepositoryAdapter
+
+  @Inject
+  lateinit var dividerItemDecoration: DividerItemDecoration
+
+  private var _binding: FragmentSearchRepositoryBinding? = null
+
+  private val binding: FragmentSearchRepositoryBinding
+    get() = checkNotNull(_binding)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
+    _binding = FragmentSearchRepositoryBinding.bind(view)
 
-    val _binding = FragmentSearchRepositoryBinding.bind(view)
+    binding.recyclerView.addItemDecoration(dividerItemDecoration)
+    binding.recyclerView.adapter = adapter
 
-    val _layoutManager = LinearLayoutManager(context!!)
-    val _dividerItemDecoration =
-      DividerItemDecoration(context!!, _layoutManager.orientation)
-    val _adapter =
-      SearchRepositoryAdapter(
-        onRepositoryClicked = {
-          gotoRepositoryFragment(repository = it)
-        },
-        searchRepositoryDiffUtilProvider = SearchRepositoryDiffUtilProvider(),
-      )
-
-    _binding.searchInputText
-      .setOnEditorActionListener { editText, action, _ ->
-        if (action == EditorInfo.IME_ACTION_SEARCH) {
-          editText.text.toString().let {
-            viewModel.searchResults(it).apply {
-              _adapter.submitList(this)
-            }
-          }
-          return@setOnEditorActionListener true
-        }
-        return@setOnEditorActionListener false
-      }
-
-    _binding.recyclerView.also {
-      it.layoutManager = _layoutManager
-      it.addItemDecoration(_dividerItemDecoration)
-      it.adapter = _adapter
+    binding.searchInputText.setOnSearchActionListener { editText ->
+      presenter.onSearchAction(query = editText.text.toString())
     }
   }
 
-  fun gotoRepositoryFragment(repository: Repository) {
-    val _action =
-      SearchRepositoryFragmentDirections.toRepositoryDetail(repository = repository)
-    findNavController().navigate(_action)
+  override fun onDestroyView() {
+    binding.recyclerView.adapter = null
+    _binding = null
+    super.onDestroyView()
+  }
+
+  override fun showRepositories(repositories: List<Repository>) {
+    adapter.submitList(repositories)
   }
 }

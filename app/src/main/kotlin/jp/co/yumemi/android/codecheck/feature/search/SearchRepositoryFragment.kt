@@ -15,8 +15,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.Repository
@@ -36,7 +34,7 @@ class SearchRepositoryFragment : Fragment(R.layout.fragment_search_repository) {
     val _dividerItemDecoration =
       DividerItemDecoration(context!!, _layoutManager.orientation)
     val _adapter =
-      CustomAdapter(object : CustomAdapter.OnItemClickListener {
+      SearchRepositoryAdapter(object : SearchRepositoryAdapter.OnItemClickListener {
         override fun itemClick(repository: Repository) {
           gotoRepositoryFragment(repository = repository)
         }
@@ -79,29 +77,3 @@ val diff_util = object : DiffUtil.ItemCallback<Repository>() {
   }
 }
 
-class CustomAdapter(
-  private val itemClickListener: OnItemClickListener
-) : ListAdapter<Repository, CustomAdapter.ViewHolder>(diff_util) {
-
-  class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
-
-  interface OnItemClickListener {
-    fun itemClick(repository: Repository)
-  }
-
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-    val _view = LayoutInflater.from(parent.context)
-      .inflate(R.layout.layout_item, parent, false)
-    return ViewHolder(_view)
-  }
-
-  override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    val _item = getItem(position)
-    (holder.itemView.findViewById<View>(R.id.repositoryNameView) as TextView).text =
-      _item.name
-
-    holder.itemView.setOnClickListener {
-      itemClickListener.itemClick(_item)
-    }
-  }
-}

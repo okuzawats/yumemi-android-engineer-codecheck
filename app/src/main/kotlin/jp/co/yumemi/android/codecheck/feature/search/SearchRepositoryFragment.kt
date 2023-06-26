@@ -12,7 +12,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.Repository
 import jp.co.yumemi.android.codecheck.databinding.FragmentSearchRepositoryBinding
-import jp.co.yumemi.android.codecheck.ui.VerticalDividerItemDecoration
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -27,14 +26,7 @@ class SearchRepositoryFragment :
   lateinit var dividerItemDecoration: DividerItemDecoration
 
   @Inject
-  lateinit var searchRepositoryDiffUtilProvider: SearchRepositoryDiffUtilProvider
-
-  private val adapter: SearchRepositoryAdapter by lazy {
-    SearchRepositoryAdapter(
-      onRepositoryClicked = presenter::onRepositorySelected,
-      searchRepositoryDiffUtilProvider = searchRepositoryDiffUtilProvider,
-    )
-  }
+  lateinit var adapter: SearchRepositoryAdapter
 
   private var _binding: FragmentSearchRepositoryBinding? = null
   private val binding: FragmentSearchRepositoryBinding

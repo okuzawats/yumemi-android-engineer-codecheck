@@ -7,12 +7,11 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.Repository
 import jp.co.yumemi.android.codecheck.databinding.FragmentSearchRepositoryBinding
+import jp.co.yumemi.android.codecheck.ui.VerticalDividerItemDecoration
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -22,6 +21,9 @@ class SearchRepositoryFragment :
 
   @Inject
   lateinit var presenter: SearchRepositoryPresenter
+
+  @Inject
+  lateinit var verticalDividerItemDecoration: VerticalDividerItemDecoration
 
   private val adapter: SearchRepositoryAdapter by lazy {
     SearchRepositoryAdapter(
@@ -37,11 +39,6 @@ class SearchRepositoryFragment :
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     _binding = FragmentSearchRepositoryBinding.bind(view)
 
-    val orientation =
-      (binding.recyclerView.layoutManager as LinearLayoutManager).orientation
-    val dividerItemDecoration =
-      DividerItemDecoration(requireContext(), orientation)
-
     binding.searchInputText
       .setOnEditorActionListener { editText, action, _ ->
         if (action == EditorInfo.IME_ACTION_SEARCH) {
@@ -52,7 +49,7 @@ class SearchRepositoryFragment :
       }
 
     binding.recyclerView.also {
-      it.addItemDecoration(dividerItemDecoration)
+      it.addItemDecoration(verticalDividerItemDecoration)
       it.adapter = adapter
     }
   }

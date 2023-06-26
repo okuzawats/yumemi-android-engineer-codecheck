@@ -12,14 +12,14 @@
     tools:layout="@layout/fragment_search_repository">
     <action
       android:id="@+id/action_repositoriesFragment_to_repositoryFragment"
-      app:destination="@id/twoFragment" />
+      app:destination="@id/repository_detail" />
   </fragment>
 
   <fragment
-    android:id="@+id/twoFragment"
-    android:name="jp.co.yumemi.android.codecheck.TwoFragment"
+    android:id="@+id/repository_detail"
+    android:name="jp.co.yumemi.android.codecheck.RepositoryDetailFragment"
     android:label="@string/app_name"
-    tools:layout="@layout/fragment_two">
+    tools:layout="@layout/fragment_repository_detail">
     <argument
       android:name="item"
       app:argType="jp.co.yumemi.android.codecheck.Item" />

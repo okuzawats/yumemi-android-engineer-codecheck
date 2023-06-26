@@ -14,7 +14,7 @@ import jp.co.yumemi.android.codecheck.Repository
  */
 class SearchRepositoryAdapter(
   private val itemClickListener: OnItemClickListener
-) : ListAdapter<Repository, ViewHolder>(diff_util) {
+) : ListAdapter<Repository, ViewHolder>(diffUtil) {
 
   interface OnItemClickListener {
     fun itemClick(repository: Repository)

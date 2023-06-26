@@ -4,11 +4,8 @@
 package jp.co.yumemi.android.codecheck.feature.search
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -67,7 +64,7 @@ class SearchRepositoryFragment : Fragment(R.layout.fragment_search_repository) {
   }
 }
 
-val diff_util = object : DiffUtil.ItemCallback<Repository>() {
+val diffUtil: DiffUtil.ItemCallback<Repository> = object : DiffUtil.ItemCallback<Repository>() {
   override fun areItemsTheSame(oldItem: Repository, newItem: Repository): Boolean {
     return oldItem.name == newItem.name
   }
@@ -76,4 +73,3 @@ val diff_util = object : DiffUtil.ItemCallback<Repository>() {
     return oldItem == newItem
   }
 }
-

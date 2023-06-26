@@ -7,11 +7,12 @@ import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.Repository
 import jp.co.yumemi.android.codecheck.databinding.LayoutRepositoryBinding
 import jp.co.yumemi.android.codecheck.ui.inflateView
+import javax.inject.Inject
 
 /**
  * リポジトリ検索画面のリスト表示のためのAdapter
  */
-class SearchRepositoryAdapter(
+class SearchRepositoryAdapter @Inject constructor(
   private val presenter: SearchRepositoryContract.Presenter,
   diffUtil: DiffUtil.ItemCallback<Repository>,
 ) : ListAdapter<Repository, SearchRepositoryViewHolder>(diffUtil) {

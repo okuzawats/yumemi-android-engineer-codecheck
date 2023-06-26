@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.Repository
@@ -26,7 +27,7 @@ class SearchRepositoryFragment :
   lateinit var presenter: SearchRepositoryPresenter
 
   @Inject
-  lateinit var adapter: SearchRepositoryAdapter
+  lateinit var adapter: ListAdapter<Repository, SearchRepositoryViewHolder>
 
   @Inject
   lateinit var dividerItemDecoration: DividerItemDecoration

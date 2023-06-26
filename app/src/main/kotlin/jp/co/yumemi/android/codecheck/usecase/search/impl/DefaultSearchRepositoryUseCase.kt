@@ -14,12 +14,12 @@ class DefaultSearchRepositoryUseCase @Inject constructor() :
       listOf(
         Repository(
           name = "this is my repository!",
-          ownerIconUrl = "",
-          language = "",
+          ownerIconUrl = "https://okuzawats.com/images/profile.webp",
+          language = "Kotlin",
           stargazersCount = 42L,
           watchersCount = 42L,
-          forksCount = 42L,
-          openIssuesCount = 42L,
+          forksCount = 1L,
+          openIssuesCount = 0L,
         ),
       ),
     )

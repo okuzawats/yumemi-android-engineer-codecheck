@@ -6,31 +6,66 @@ package jp.co.yumemi.android.codecheck.feature.detail
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.navArgs
-import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codecheck.R
+import jp.co.yumemi.android.codecheck.Repository
 import jp.co.yumemi.android.codecheck.databinding.FragmentRepositoryDetailBinding
+import jp.co.yumemi.android.codecheck.ui.ImageLoader
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class RepositoryDetailFragment : Fragment(R.layout.fragment_repository_detail) {
+class RepositoryDetailFragment :
+  Fragment(R.layout.fragment_repository_detail),
+  RepositoryDetailContract.View {
 
-  private val args: RepositoryDetailFragmentArgs by navArgs()
+  @Inject
+  lateinit var presenter: RepositoryDetailPresenter
 
-  private var binding: FragmentRepositoryDetailBinding? = null
-  private val _binding get() = binding!!
+  @Inject
+  lateinit var imageLoader: ImageLoader
+
+  private var _binding: FragmentRepositoryDetailBinding? = null
+  private val binding: FragmentRepositoryDetailBinding
+    get() = checkNotNull(_binding)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    binding = FragmentRepositoryDetailBinding.bind(view)
+    _binding = FragmentRepositoryDetailBinding.bind(view)
+    presenter.onEntered()
+  }
 
-    val repository = args.repository
+  override fun onDestroyView() {
+    _binding = null
+    super.onDestroyView()
+  }
 
-    _binding.ownerIconView.load(repository.ownerIconUrl)
-    _binding.nameView.text = repository.name
-    _binding.languageView.text = repository.language
-    _binding.starsView.text = "${repository.stargazersCount} stars"
-    _binding.watchersView.text = "${repository.watchersCount} watchers"
-    _binding.forksView.text = "${repository.forksCount} forks"
-    _binding.openIssuesView.text = "${repository.openIssuesCount} open issues"
+  override fun showRepository(repository: Repository) {
+    imageLoader
+      .load(ImageLoader.ImageUrl(repository.ownerIconUrl))
+      .into(binding.ownerIconView)
+    binding.nameView.text = repository.name
+    binding.languageView.text = getString(
+      R.string.written_language,
+      repository.language,
+    )
+    binding.starsView.text = resources.getQuantityString(
+      R.plurals.repository_star,
+      repository.stargazersCount.toInt(),
+      repository.stargazersCount.toInt(),
+    )
+    binding.watchersView.text = resources.getQuantityString(
+      R.plurals.repository_watcher,
+      repository.watchersCount.toInt(),
+      repository.watchersCount.toInt(),
+    )
+    binding.forksView.text = resources.getQuantityString(
+      R.plurals.repository_fork,
+      repository.forksCount.toInt(),
+      repository.forksCount.toInt(),
+    )
+    binding.openIssuesView.text = resources.getQuantityString(
+      R.plurals.repository_open_issue,
+      repository.openIssuesCount.toInt(),
+      repository.openIssuesCount.toInt(),
+    )
   }
 }

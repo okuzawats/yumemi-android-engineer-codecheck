@@ -14,7 +14,7 @@ class DefaultSearchRepositoryUseCase @Inject constructor() :
       listOf(
         Repository(
           name = "this is my repository!",
-          ownerIconUrl = "",
+          ownerIconUrl = "https://okuzawats.com/images/profile.webp",
           language = "",
           stargazersCount = 42L,
           watchersCount = 42L,

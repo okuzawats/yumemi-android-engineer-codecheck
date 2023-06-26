@@ -21,26 +21,27 @@ class SearchRepositoryFragment : Fragment(R.layout.fragment_search_repository) {
 
   private val viewModel: SearchRepositoryViewModel by viewModels()
 
+  private val adapter: SearchRepositoryAdapter by lazy {
+    SearchRepositoryAdapter(
+      onRepositoryClicked = {
+        gotoRepositoryFragment(repository = it)
+      },
+      searchRepositoryDiffUtilProvider = SearchRepositoryDiffUtilProvider(),
+    )
+  }
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     val _binding = FragmentSearchRepositoryBinding.bind(view)
 
-    val _layoutManager = LinearLayoutManager(context!!)
-    val _dividerItemDecoration =
-      DividerItemDecoration(context!!, _layoutManager.orientation)
-    val _adapter =
-      SearchRepositoryAdapter(
-        onRepositoryClicked = {
-          gotoRepositoryFragment(repository = it)
-        },
-        searchRepositoryDiffUtilProvider = SearchRepositoryDiffUtilProvider(),
-      )
+    val orientation = (_binding.recyclerView.layoutManager as LinearLayoutManager).orientation
+    val dividerItemDecoration = DividerItemDecoration(requireContext(), orientation)
 
     _binding.searchInputText
       .setOnEditorActionListener { editText, action, _ ->
         if (action == EditorInfo.IME_ACTION_SEARCH) {
           editText.text.toString().let {
             viewModel.searchResults(it).apply {
-              _adapter.submitList(this)
+              adapter.submitList(this)
             }
           }
           return@setOnEditorActionListener true
@@ -49,9 +50,8 @@ class SearchRepositoryFragment : Fragment(R.layout.fragment_search_repository) {
       }
 
     _binding.recyclerView.also {
-      it.layoutManager = _layoutManager
-      it.addItemDecoration(_dividerItemDecoration)
-      it.adapter = _adapter
+      it.addItemDecoration(dividerItemDecoration)
+      it.adapter = adapter
     }
   }
 

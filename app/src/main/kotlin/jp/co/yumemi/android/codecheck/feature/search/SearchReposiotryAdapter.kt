@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import jp.co.yumemi.android.codecheck.R
@@ -13,8 +14,9 @@ import jp.co.yumemi.android.codecheck.Repository
  * リポジトリ検索画面のリスト表示のためのAdapter
  */
 class SearchRepositoryAdapter(
-  private val itemClickListener: OnItemClickListener
-) : ListAdapter<Repository, ViewHolder>(diffUtil) {
+  private val itemClickListener: OnItemClickListener,
+  searchRepositoryDiffUtilProvider: SearchRepositoryDiffUtilProvider,
+) : ListAdapter<Repository, ViewHolder>(searchRepositoryDiffUtilProvider.provide()) {
 
   interface OnItemClickListener {
     fun itemClick(repository: Repository)

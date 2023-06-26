@@ -31,11 +31,15 @@ class SearchRepositoryFragment : Fragment(R.layout.fragment_search_repository) {
     val _dividerItemDecoration =
       DividerItemDecoration(context!!, _layoutManager.orientation)
     val _adapter =
-      SearchRepositoryAdapter(object : SearchRepositoryAdapter.OnItemClickListener {
-        override fun itemClick(repository: Repository) {
-          gotoRepositoryFragment(repository = repository)
-        }
-      })
+      SearchRepositoryAdapter(
+        itemClickListener = object :
+          SearchRepositoryAdapter.OnItemClickListener {
+          override fun itemClick(repository: Repository) {
+            gotoRepositoryFragment(repository = repository)
+          }
+        },
+        searchRepositoryDiffUtilProvider = SearchRepositoryDiffUtilProvider(),
+      )
 
     _binding.searchInputText
       .setOnEditorActionListener { editText, action, _ ->
@@ -61,15 +65,5 @@ class SearchRepositoryFragment : Fragment(R.layout.fragment_search_repository) {
     val _action =
       SearchRepositoryFragmentDirections.toRepositoryDetail(repository = repository)
     findNavController().navigate(_action)
-  }
-}
-
-val diffUtil: DiffUtil.ItemCallback<Repository> = object : DiffUtil.ItemCallback<Repository>() {
-  override fun areItemsTheSame(oldItem: Repository, newItem: Repository): Boolean {
-    return oldItem.name == newItem.name
-  }
-
-  override fun areContentsTheSame(oldItem: Repository, newItem: Repository): Boolean {
-    return oldItem == newItem
   }
 }

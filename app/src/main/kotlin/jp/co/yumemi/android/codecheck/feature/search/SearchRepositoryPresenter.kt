@@ -8,8 +8,11 @@ import javax.inject.Inject
  */
 class SearchRepositoryPresenter @Inject constructor(
   private val navigator: SearchRepositoryNavigator,
-) :
-  SearchRepositoryContract.Presenter {
+) : SearchRepositoryContract.Presenter {
+  override fun onSearchAction(query: String) {
+    TODO("Not yet implemented")
+  }
+
   override fun onRepositorySelected(
     repository: Repository,
   ) {

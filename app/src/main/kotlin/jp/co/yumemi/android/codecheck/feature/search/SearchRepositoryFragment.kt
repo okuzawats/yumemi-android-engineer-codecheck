@@ -51,11 +51,12 @@ class SearchRepositoryFragment :
     binding.searchInputText
       .setOnEditorActionListener { editText, action, _ ->
         if (action == EditorInfo.IME_ACTION_SEARCH) {
-          editText.text.toString().let {
-            viewModel.searchResults(it).apply {
-              adapter.submitList(this)
-            }
-          }
+//          editText.text.toString().let {
+//            viewModel.searchResults(it).apply {
+//              adapter.submitList(this)
+//            }
+//          }
+          presenter.onSearchAction(query = editText.text.toString())
           return@setOnEditorActionListener true
         }
         return@setOnEditorActionListener false

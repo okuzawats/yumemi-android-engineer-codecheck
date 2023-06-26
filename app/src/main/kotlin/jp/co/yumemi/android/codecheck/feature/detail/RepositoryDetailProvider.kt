@@ -16,7 +16,7 @@ interface RepositoryDetailProvider {
 
 class RepositoryDetailProviderImpl @Inject constructor(
   private val repositoryDetailFragment: RepositoryDetailFragment,
-): RepositoryDetailProvider {
+) : RepositoryDetailProvider {
   override fun provide(): Repository {
     val navArgs = repositoryDetailFragment
       .navArgs<RepositoryDetailFragmentArgs>()

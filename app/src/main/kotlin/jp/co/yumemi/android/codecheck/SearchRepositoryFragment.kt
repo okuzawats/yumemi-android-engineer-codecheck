@@ -61,7 +61,7 @@ class SearchRepositoryFragment : Fragment(R.layout.fragment_search_repository) {
 
   fun gotoRepositoryFragment(item: Item) {
     val _action = SearchRepositoryFragmentDirections
-      .actionRepositoriesFragmentToRepositoryFragment(item = item)
+      .toRepositoryDetail(item = item)
     findNavController().navigate(_action)
   }
 }

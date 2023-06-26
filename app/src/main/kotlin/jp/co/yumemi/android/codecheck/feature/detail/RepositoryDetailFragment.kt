@@ -6,11 +6,11 @@ package jp.co.yumemi.android.codecheck.feature.detail
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.Repository
 import jp.co.yumemi.android.codecheck.databinding.FragmentRepositoryDetailBinding
+import jp.co.yumemi.android.codecheck.ui.ImageLoader
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -20,6 +20,9 @@ class RepositoryDetailFragment :
 
   @Inject
   lateinit var presenter: RepositoryDetailPresenter
+
+  @Inject
+  lateinit var imageLoader: ImageLoader
 
   private var _binding: FragmentRepositoryDetailBinding? = null
   private val binding: FragmentRepositoryDetailBinding
@@ -31,7 +34,9 @@ class RepositoryDetailFragment :
   }
 
   override fun showRepository(repository: Repository) {
-    binding.ownerIconView.load(repository.ownerIconUrl)
+    imageLoader
+      .load(ImageLoader.ImageUrl(repository.ownerIconUrl))
+      .into(binding.ownerIconView)
     binding.nameView.text = repository.name
     binding.languageView.text = repository.language
     binding.starsView.text = "${repository.stargazersCount} stars"

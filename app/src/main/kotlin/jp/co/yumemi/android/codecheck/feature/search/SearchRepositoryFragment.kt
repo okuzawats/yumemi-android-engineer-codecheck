@@ -22,8 +22,6 @@ class SearchRepositoryFragment : Fragment(R.layout.fragment_search_repository) {
   private val viewModel: SearchRepositoryViewModel by viewModels()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-
     val _binding = FragmentSearchRepositoryBinding.bind(view)
 
     val _layoutManager = LinearLayoutManager(context!!)

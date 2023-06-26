@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.Repository
@@ -23,7 +24,7 @@ class SearchRepositoryFragment :
   lateinit var presenter: SearchRepositoryPresenter
 
   @Inject
-  lateinit var verticalDividerItemDecoration: VerticalDividerItemDecoration
+  lateinit var dividerItemDecoration: DividerItemDecoration
 
   @Inject
   lateinit var searchRepositoryDiffUtilProvider: SearchRepositoryDiffUtilProvider
@@ -52,7 +53,7 @@ class SearchRepositoryFragment :
       }
 
     binding.recyclerView.also {
-      it.addItemDecoration(verticalDividerItemDecoration)
+      it.addItemDecoration(dividerItemDecoration)
       it.adapter = adapter
     }
   }

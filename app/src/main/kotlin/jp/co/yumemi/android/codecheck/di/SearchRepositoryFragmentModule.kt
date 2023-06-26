@@ -3,6 +3,7 @@ package jp.co.yumemi.android.codecheck.di
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,6 +16,7 @@ import jp.co.yumemi.android.codecheck.feature.search.SearchRepositoryDiffUtilPro
 import jp.co.yumemi.android.codecheck.feature.search.SearchRepositoryFragment
 import jp.co.yumemi.android.codecheck.feature.search.SearchRepositoryNavigator
 import jp.co.yumemi.android.codecheck.feature.search.SearchRepositoryPresenter
+import jp.co.yumemi.android.codecheck.feature.search.SearchRepositoryViewHolder
 import jp.co.yumemi.android.codecheck.navigation.DefaultSearchRepositoryNavigator
 import kotlinx.coroutines.CoroutineScope
 
@@ -40,13 +42,9 @@ class SearchRepositoryFragmentModule {
   @Provides
   @FragmentScoped
   fun provideSearchRepositoryAdapter(
-    presenter: SearchRepositoryPresenter,
-    diffUtil: DiffUtil.ItemCallback<Repository>,
-  ): SearchRepositoryAdapter {
-    return SearchRepositoryAdapter(
-      presenter = presenter,
-      diffUtil = diffUtil,
-    )
+    searchRepositoryAdapter: SearchRepositoryAdapter,
+  ): ListAdapter<Repository, SearchRepositoryViewHolder> {
+    return searchRepositoryAdapter
   }
 
   @Provides

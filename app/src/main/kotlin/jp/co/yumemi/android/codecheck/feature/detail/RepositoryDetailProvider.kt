@@ -1,6 +1,6 @@
 package jp.co.yumemi.android.codecheck.feature.detail
 
-import androidx.navigation.fragment.navArgs
+import androidx.navigation.NavArgsLazy
 import jp.co.yumemi.android.codecheck.Repository
 import javax.inject.Inject
 
@@ -15,11 +15,9 @@ interface RepositoryDetailProvider {
 }
 
 class RepositoryDetailProviderImpl @Inject constructor(
-  private val repositoryDetailFragment: RepositoryDetailFragment,
+  private val navArgs: NavArgsLazy<RepositoryDetailFragmentArgs>,
 ) : RepositoryDetailProvider {
   override fun provide(): Repository {
-    val navArgs = repositoryDetailFragment
-      .navArgs<RepositoryDetailFragmentArgs>()
     return navArgs.value.repository
   }
 }

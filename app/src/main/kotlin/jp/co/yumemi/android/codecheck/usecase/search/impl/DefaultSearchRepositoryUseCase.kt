@@ -15,11 +15,11 @@ class DefaultSearchRepositoryUseCase @Inject constructor() :
         Repository(
           name = "this is my repository!",
           ownerIconUrl = "https://okuzawats.com/images/profile.webp",
-          language = "",
+          language = "Kotlin",
           stargazersCount = 42L,
           watchersCount = 42L,
-          forksCount = 42L,
-          openIssuesCount = 42L,
+          forksCount = 1L,
+          openIssuesCount = 0L,
         ),
       ),
     )

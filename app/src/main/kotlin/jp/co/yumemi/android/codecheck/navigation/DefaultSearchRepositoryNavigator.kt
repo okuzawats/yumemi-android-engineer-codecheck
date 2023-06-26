@@ -15,8 +15,8 @@ class DefaultSearchRepositoryNavigator @Inject constructor(
 ) : SearchRepositoryNavigator {
   override fun toRepositoryDetail(repository: Repository) {
     val action = SearchRepositoryFragmentDirections.toRepositoryDetail(
-        repository = repository,
-      )
+      repository = repository,
+    )
     fragment.findNavController().navigate(action)
   }
 }

@@ -9,19 +9,22 @@ import javax.inject.Inject
 
 /**
  * [SearchRepositoryContract.Presenter]の実装クラス
+ *
+ * FragmentのviewLifecycleOwnerのlifecycleScopeは
+ * Fragment生成時には取得できないため、インスタンスの取得を遅延させる必要がある。
  */
 class SearchRepositoryPresenter @Inject constructor(
   private val view: SearchRepositoryContract.View,
   private val searchRepositoryUseCase: SearchRepositoryUseCase,
   private val navigator: SearchRepositoryNavigator,
-  private val scope: CoroutineScope,
+  private val scope: dagger.Lazy<CoroutineScope>,
 ) : SearchRepositoryContract.Presenter {
   override fun onSearchAction(
     query: String,
   ) {
     searchRepositoryUseCase(query)
       .onEach(view::showRepositories)
-      .launchIn(scope)
+      .launchIn(scope.get())
   }
 
   override fun onRepositorySelected(

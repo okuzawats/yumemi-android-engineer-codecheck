@@ -60,7 +60,7 @@ class SearchRepositoryFragmentModule {
   fun provideFragmentScope(
     searchRepositoryFragment: SearchRepositoryFragment,
   ): CoroutineScope {
-    return searchRepositoryFragment.lifecycleScope
+    return searchRepositoryFragment.viewLifecycleOwner.lifecycleScope
   }
 
   @Provides

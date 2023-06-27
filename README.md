@@ -22,6 +22,15 @@
 ※ ライブラリの利用はオープンソースのものに限ります。
 ※ 環境は適宜更新してください。
 
+## 開発環境構築
+
+1. GitHubから `schema.json` をダウンロードし、`app/src/main/graphql` に配置してください。
+   - `schema.json` の入手方法は以下の記事を参照してください。
+   - [GitHub GraphQL のスキーマ情報を取得する｜まくろぐ](https://maku.blog/p/whv8it5/)
+2. `jp.co.yumemi.android.codecheck.token.GitHubTokneProvider` を開き、自身のGitHubのトークンを入力してください。
+   - この変更はコミットしないでください。 
+   - `gradle.properties` を用いたトークンの管理は残課題としています。
+
 ### 動作
 
 1. 何かしらのキーワードを入力

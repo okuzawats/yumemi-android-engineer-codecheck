@@ -8,9 +8,15 @@ import javax.inject.Inject
  */
 class SearchRepositoryMapper @Inject constructor() {
   /**
-   * プレゼンテーション用のモデルに変換する
+   * Listをプレゼンテーション用のモデルに変換する
    */
   fun toPresentation(
+    repositories: List<Repository>,
+  ): List<jp.co.yumemi.android.codecheck.Repository> {
+    return repositories.map(::toPresentation)
+  }
+
+  private fun toPresentation(
     repository: Repository
   ): jp.co.yumemi.android.codecheck.Repository {
     // 画像は仮です :)

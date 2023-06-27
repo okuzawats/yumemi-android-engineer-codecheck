@@ -27,7 +27,7 @@ class SearchRepositoryPresenter @Inject constructor(
   ) {
     scope.get().launch {
       searchRepositoryUseCase(query)
-        .map { it.map(mapper::toPresentation) }
+        .map(mapper::toPresentation)
         .onEach(view::showRepositories)
         .launchIn(this)
     }

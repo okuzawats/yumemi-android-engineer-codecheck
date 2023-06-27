@@ -8,25 +8,50 @@
 
 本アプリは GitHub のリポジトリを検索するアプリです。
 
-<img src="docs/app.gif" width="320">
+<img src="docs/app.mp4" width="320">
 
 ### 環境
 
 - IDE：Android Studio Flamingo | 2022.2.1 Patch 2
-- Kotlin：1.6.21
+- Kotlin：1.8.22
 - Java：17
 - Gradle：8.1.1
 - minSdk：23
-- targetSdk：31
+- targetSdk：34
 
 ※ ライブラリの利用はオープンソースのものに限ります。
 ※ 環境は適宜更新してください。
 
+### 開発環境構築
+
+1. GitHubから `schema.json` をダウンロードし、`app/src/main/graphql` に配置してください。
+   - `schema.json` の入手方法は以下の記事を参照してください。
+   - [GitHub GraphQL のスキーマ情報を取得する｜まくろぐ](https://maku.blog/p/whv8it5/)
+2. `jp.co.yumemi.android.codecheck.token.GitHubTokneProvider` を開き、自身のGitHubのトークンを入力してください。
+   - この変更はコミットしないでください。 
+   - `gradle.properties` を用いたトークンの管理は残課題としています。
+
 ### 動作
 
-1. 何かしらのキーワードを入力
-2. GitHub API（`search/repositories`）でリポジトリを検索し、結果一覧を概要（リポジトリ名）で表示
-3. 特定の結果を選択したら、該当リポジトリの詳細（リポジトリ名、オーナーアイコン、プロジェクト言語、Star 数、Watcher 数、Fork 数、Issue 数）を表示
+1. GitHubのアカウント名を入力（例：okuzawats）
+2. GitHub API（`https://api.github.com/graphql`）で対象のアカウントのリポジトリを検索し、結果一覧を概要（リポジトリ名）で表示
+3. 特定の結果を選択したら、該当リポジトリの詳細（リポジトリ概要、Fork 数、Star 数）を表示
+
+## アーキテクチャ概要
+
+### MVP
+
+MVP（Model-View-Presenter）アーキテクチャを採用しています。また、画面間の結合を避けるために、画面遷移はNavigatorインターフェースを経由して行っています。
+
+### Repository
+
+リポジトリパターンを採用しています。各画面は、PresenterからUseCaseを呼び出し、UseCaseからRepositoryの処理を呼び出します。
+
+### GraphQL
+
+GitHubのGraphQL APIを用いてリポジトリの検索を行っています。GraphQLのクライアントとして、Apollo Kotlinを使用しています。
+
+* [apollographql/apollo-kotlin: :robot:  A strongly-typed, caching GraphQL client for the JVM, Android, and Kotlin multiplatform.](https://github.com/apollographql/apollo-kotlin)
 
 ## 課題取り組み方法
 

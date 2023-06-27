@@ -19,6 +19,7 @@ class SearchRepositoryPresenter @Inject constructor(
   private val view: SearchRepositoryContract.View,
   private val searchRepositoryUseCase: SearchRepositoryUseCase,
   private val navigator: SearchRepositoryNavigator,
+  private val mapper: SearchRepositoryMapper,
   private val scope: dagger.Lazy<CoroutineScope>,
 ) : SearchRepositoryContract.Presenter {
   override fun onSearchAction(
@@ -26,18 +27,9 @@ class SearchRepositoryPresenter @Inject constructor(
   ) {
     scope.get().launch {
       searchRepositoryUseCase(query)
-        .map { repositories ->
-          repositories.map {
-            Repository(
-              ownerIconUrl = "https://okuzawats.com/images/profile.webp",
-              description = it.description.orEmpty(),
-              forksCount = it.forkCount,
-              stargazersCount = it.stargazerCount,
-            )
-          }
-        }
+        .map(mapper::toPresentation)
         .onEach(view::showRepositories)
-        .launchIn(scope.get())
+        .launchIn(this)
     }
   }
 

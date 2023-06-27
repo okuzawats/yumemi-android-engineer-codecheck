@@ -8,7 +8,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codecheck.R
-import jp.co.yumemi.android.codecheck.Repository
 import jp.co.yumemi.android.codecheck.databinding.FragmentRepositoryDetailBinding
 import jp.co.yumemi.android.codecheck.ui.ImageLoader
 import javax.inject.Inject
@@ -38,20 +37,12 @@ class RepositoryDetailFragment :
     super.onDestroyView()
   }
 
-  override fun showRepository(repository: Repository) {
+  override fun showRepository(repository: RepositoryDetailModel) {
     imageLoader
-      .load(ImageLoader.ImageUrl(repository.ownerIconUrl))
+      .load(repository.ownerIconUrl)
       .into(binding.ownerIconView)
     binding.nameView.text = repository.description
-    binding.forksView.text = resources.getQuantityString(
-      R.plurals.repository_fork,
-      repository.forksCount,
-      repository.forksCount,
-    )
-    binding.starsView.text = resources.getQuantityString(
-      R.plurals.repository_star,
-      repository.stargazersCount,
-      repository.stargazersCount,
-    )
+    binding.forksView.text = repository.forks
+    binding.starsView.text = repository.stars
   }
 }

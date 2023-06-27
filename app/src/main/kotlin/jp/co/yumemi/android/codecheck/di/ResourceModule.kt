@@ -14,5 +14,7 @@ class ResourceModule {
   @Provides
   fun provideResource(
     @ApplicationContext context: Context,
-  ): Resources = context.resources
+  ): Resources {
+    return context.resources
+  }
 }

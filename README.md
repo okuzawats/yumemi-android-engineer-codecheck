@@ -8,7 +8,7 @@
 
 本アプリは GitHub のリポジトリを検索するアプリです。
 
-<img src="docs/app.gif" width="320">
+<img src="docs/app.mp4" width="320">
 
 ### 環境
 

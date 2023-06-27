@@ -37,6 +37,22 @@
 2. GitHub API（`https://api.github.com/graphql`）で対象のアカウントのリポジトリを検索し、結果一覧を概要（リポジトリ名）で表示
 3. 特定の結果を選択したら、該当リポジトリの詳細（リポジトリ概要、Fork 数、Star 数）を表示
 
+## アーキテクチャ概要
+
+### MVP
+
+MVP（Model-View-Presenter）アーキテクチャを採用しています。また、画面間の結合を避けるために、画面遷移はNavigatorインターフェースを経由して行っています。
+
+### Repository
+
+リポジトリパターンを採用しています。各画面は、PresenterからUseCaseを呼び出し、UseCaseからRepositoryの処理を呼び出します。
+
+### GraphQL
+
+GitHubのGraphQL APIを用いてリポジトリの検索を行っています。GraphQLのクライアントとして、Apollo Kotlinを使用しています。
+
+* [apollographql/apollo-kotlin: :robot:  A strongly-typed, caching GraphQL client for the JVM, Android, and Kotlin multiplatform.](https://github.com/apollographql/apollo-kotlin)
+
 ## 課題取り組み方法
 
 Issues を確認した上、本プロジェクトを [**Duplicate** してください](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/duplicating-a-repository)（Fork しないようにしてください。必要ならプライベートリポジトリにしても大丈夫です）。今後のコミットは全てご自身のリポジトリで行ってください。

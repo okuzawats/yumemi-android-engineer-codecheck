@@ -13,11 +13,11 @@
 ### 環境
 
 - IDE：Android Studio Flamingo | 2022.2.1 Patch 2
-- Kotlin：1.6.21
+- Kotlin：1.8.22
 - Java：17
 - Gradle：8.1.1
 - minSdk：23
-- targetSdk：31
+- targetSdk：34
 
 ※ ライブラリの利用はオープンソースのものに限ります。
 ※ 環境は適宜更新してください。

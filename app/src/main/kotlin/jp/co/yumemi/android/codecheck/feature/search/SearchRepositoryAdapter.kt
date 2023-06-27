@@ -30,7 +30,7 @@ class SearchRepositoryAdapter @Inject constructor(
     position: Int,
   ) {
     val repository = getItem(position)
-    holder.binding.repositoryNameView.text = repository.name
+    holder.binding.repositoryNameView.text = repository.description
     holder.binding.root.setOnClickListener {
       presenter.onRepositorySelected(repository = repository)
     }

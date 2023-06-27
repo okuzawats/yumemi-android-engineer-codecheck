@@ -1,0 +1,11 @@
+query RepositoryQuery($id: String!) {
+    user(login: $id) {
+        repositories(first: 100) {
+            nodes {
+               description
+               forkCount
+               stargazerCount
+            }
+        }
+    }
+}

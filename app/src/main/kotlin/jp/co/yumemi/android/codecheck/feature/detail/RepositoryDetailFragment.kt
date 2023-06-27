@@ -42,30 +42,16 @@ class RepositoryDetailFragment :
     imageLoader
       .load(ImageLoader.ImageUrl(repository.ownerIconUrl))
       .into(binding.ownerIconView)
-    binding.nameView.text = repository.name
-    binding.languageView.text = getString(
-      R.string.written_language,
-      repository.language,
+    binding.nameView.text = repository.description
+    binding.forksView.text = resources.getQuantityString(
+      R.plurals.repository_fork,
+      repository.forksCount,
+      repository.forksCount,
     )
     binding.starsView.text = resources.getQuantityString(
       R.plurals.repository_star,
-      repository.stargazersCount.toInt(),
-      repository.stargazersCount.toInt(),
-    )
-    binding.watchersView.text = resources.getQuantityString(
-      R.plurals.repository_watcher,
-      repository.watchersCount.toInt(),
-      repository.watchersCount.toInt(),
-    )
-    binding.forksView.text = resources.getQuantityString(
-      R.plurals.repository_fork,
-      repository.forksCount.toInt(),
-      repository.forksCount.toInt(),
-    )
-    binding.openIssuesView.text = resources.getQuantityString(
-      R.plurals.repository_open_issue,
-      repository.openIssuesCount.toInt(),
-      repository.openIssuesCount.toInt(),
+      repository.stargazersCount,
+      repository.stargazersCount,
     )
   }
 }

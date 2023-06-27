@@ -7,10 +7,13 @@ import javax.inject.Inject
  */
 class RepositoryDetailPresenter @Inject constructor(
   private val view: RepositoryDetailContract.View,
+  private val mapper: RepositoryDetailMapper,
   private val repositoryDetailProvider: RepositoryDetailProvider,
 ) : RepositoryDetailContract.Presenter {
   override fun onEntered() {
     val repository = repositoryDetailProvider.provide()
-    view.showRepository(repository = repository)
+    view.showRepository(
+      repository = mapper.toPresentation(repository),
+    )
   }
 }

@@ -1,6 +1,5 @@
 package jp.co.yumemi.android.codecheck.usecase.search
 
-import jp.co.yumemi.android.codecheck.Repository
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -10,5 +9,5 @@ interface SearchRepositoryUseCase {
   /**
    * 検索を実行する。
    */
-  operator fun invoke(query: String): Flow<List<Repository>>
+  suspend operator fun invoke(query: String): Flow<List<Repository>>
 }

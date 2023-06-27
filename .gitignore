@@ -91,3 +91,8 @@ lint/tmp/
 
 # Android Profiling
 *.hprof
+
+# GraphQL
+# GitHubからダウンロードすること
+# see https://maku.blog/p/whv8it5/
+app/src/main/graphql/schema.json

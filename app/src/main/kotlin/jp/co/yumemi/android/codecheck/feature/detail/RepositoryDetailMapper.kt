@@ -1,7 +1,6 @@
 package jp.co.yumemi.android.codecheck.feature.detail
 
-import android.content.Context
-import dagger.hilt.android.qualifiers.ApplicationContext
+import android.content.res.Resources
 import jp.co.yumemi.android.codecheck.R
 import jp.co.yumemi.android.codecheck.Repository
 import jp.co.yumemi.android.codecheck.ui.ImageLoader
@@ -11,8 +10,7 @@ import javax.inject.Inject
  * データモデルの変換を行うためのクラス
  */
 class RepositoryDetailMapper @Inject constructor(
-  @ApplicationContext
-  private val context: Context,
+  private val resources: Resources,
 ) {
   /**
    * プレゼンテーション用のデータモデルに変換する
@@ -21,12 +19,12 @@ class RepositoryDetailMapper @Inject constructor(
     return RepositoryDetailModel(
       ownerIconUrl = ImageLoader.ImageUrl(repository.ownerIconUrl),
       description = repository.description,
-      forks = context.resources.getQuantityString(
+      forks = resources.getQuantityString(
         R.plurals.repository_fork,
         repository.forksCount,
         repository.forksCount,
       ),
-      stars = context.resources.getQuantityString(
+      stars = resources.getQuantityString(
         R.plurals.repository_star,
         repository.stargazersCount,
         repository.stargazersCount,

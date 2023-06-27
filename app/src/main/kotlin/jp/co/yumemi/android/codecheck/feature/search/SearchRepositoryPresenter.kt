@@ -1,5 +1,6 @@
 package jp.co.yumemi.android.codecheck.feature.search
 
+import dagger.hilt.android.scopes.FragmentScoped
 import jp.co.yumemi.android.codecheck.Repository
 import jp.co.yumemi.android.codecheck.usecase.search.SearchRepositoryUseCase
 import kotlinx.coroutines.CoroutineScope
@@ -15,6 +16,7 @@ import javax.inject.Inject
  * FragmentのviewLifecycleOwnerのlifecycleScopeは
  * Fragment生成時には取得できないため、インスタンスの取得を遅延させる必要がある。
  */
+@FragmentScoped
 class SearchRepositoryPresenter @Inject constructor(
   private val view: SearchRepositoryContract.View,
   private val searchRepositoryUseCase: SearchRepositoryUseCase,

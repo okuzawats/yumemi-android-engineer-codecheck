@@ -13,7 +13,7 @@ class SearchRepositoryDiffUtilProvider {
         oldItem: Repository,
         newItem: Repository,
       ): Boolean {
-        return oldItem.name == newItem.name
+        return oldItem.description == newItem.description
       }
 
       override fun areContentsTheSame(

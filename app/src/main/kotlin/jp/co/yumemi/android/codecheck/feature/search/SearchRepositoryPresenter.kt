@@ -4,7 +4,9 @@ import jp.co.yumemi.android.codecheck.Repository
 import jp.co.yumemi.android.codecheck.usecase.search.SearchRepositoryUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -22,9 +24,21 @@ class SearchRepositoryPresenter @Inject constructor(
   override fun onSearchAction(
     query: String,
   ) {
-    searchRepositoryUseCase(query)
-      .onEach(view::showRepositories)
-      .launchIn(scope.get())
+    scope.get().launch {
+      searchRepositoryUseCase(query)
+        .map { repositories ->
+          repositories.map {
+            Repository(
+              ownerIconUrl = "https://okuzawats.com/images/profile.webp",
+              description = it.description.orEmpty(),
+              forksCount = it.forkCount,
+              stargazersCount = it.stargazerCount,
+            )
+          }
+        }
+        .onEach(view::showRepositories)
+        .launchIn(scope.get())
+    }
   }
 
   override fun onRepositorySelected(
